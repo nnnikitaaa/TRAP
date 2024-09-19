@@ -121,35 +121,35 @@
                     android:id="@+id/dailyButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/daily_text"
+                    android:text="@string/period_daily"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <RadioButton
                     android:id="@+id/weeklyButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/weekly_text"
+                    android:text="@string/period_weekly"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <RadioButton
                     android:id="@+id/monthlyButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/monthly_text"
+                    android:text="@string/period_monthly"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <RadioButton
                     android:id="@+id/onWeekdaysButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/weekdays_text"
+                    android:text="@string/period_weekdays"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <RadioButton
                     android:id="@+id/onWeekendsButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/weekends_text"
+                    android:text="@string/period_weekends"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </RadioGroup>
 
