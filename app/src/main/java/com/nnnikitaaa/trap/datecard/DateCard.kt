@@ -1,4 +1,4 @@
-package com.nnnikitaaa.trap
+package com.nnnikitaaa.trap.datecard
 
 import java.time.LocalDate
 

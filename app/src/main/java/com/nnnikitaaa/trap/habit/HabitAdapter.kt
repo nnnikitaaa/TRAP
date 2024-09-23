@@ -1,4 +1,4 @@
-package com.nnnikitaaa.trap
+package com.nnnikitaaa.trap.habit
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,14 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.nnnikitaaa.trap.R
+import com.nnnikitaaa.trap.datecard.DateCard
 
-class HabitAdapter(private var habits: List<Habit>, private var context: Context) :
+class HabitAdapter(
+    private var habits: MutableList<Habit>,
+    private var context: Context,
+    private val onCheckBoxCheckedChange: (Habit, Int, Boolean) -> Unit
+) :
     RecyclerView.Adapter<HabitAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,7 +36,18 @@ class HabitAdapter(private var habits: List<Habit>, private var context: Context
         val currentHabit = habits[position]
         holder.title.text = currentHabit.name
         holder.description.text = currentHabit.period.toLocalizedString(context)
-        holder.checkbox.isChecked = currentHabit.completed
+        holder.checkbox.setOnCheckedChangeListener(null)
         holder.checkbox.isEnabled = currentHabit.enabled
+        holder.checkbox.isChecked = currentHabit.completed
+
+        holder.checkbox.setOnCheckedChangeListener { _, isChecked ->
+            onCheckBoxCheckedChange(currentHabit, position, isChecked)
+        }
+    }
+
+    fun updateHabits(newHabits: List<Habit>) {
+        habits.clear()
+        habits.addAll(newHabits)
+        notifyDataSetChanged()
     }
 }

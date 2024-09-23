@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddHabitActivity">
+    tools:context=".activities.AddHabitActivity">
 
     <TextView
         android:id="@+id/activityTitle"
@@ -118,35 +118,35 @@
                 android:layout_marginEnd="16dp">
 
                 <RadioButton
-                    android:id="@+id/dailyButton"
+                    android:id="@+id/period_daily"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/period_daily"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <RadioButton
-                    android:id="@+id/weeklyButton"
+                    android:id="@+id/period_weekly"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/period_weekly"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <RadioButton
-                    android:id="@+id/monthlyButton"
+                    android:id="@+id/period_monthly"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/period_monthly"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <RadioButton
-                    android:id="@+id/onWeekdaysButton"
+                    android:id="@+id/period_weekdays"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/period_weekdays"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <RadioButton
-                    android:id="@+id/onWeekendsButton"
+                    android:id="@+id/period_weekends"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/period_weekends"

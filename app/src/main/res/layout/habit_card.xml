@@ -7,6 +7,7 @@
     android:layout_marginBottom="8dp"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:hapticFeedbackEnabled="true"
     app:cardBackgroundColor="@color/md_theme_surfaceContainer"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"

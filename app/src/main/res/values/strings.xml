@@ -15,4 +15,6 @@
     <string name="period_monthly">Ежемесячно</string>
     <string name="period_weekdays">По будним дням</string>
     <string name="period_weekends">По выходным</string>
+    <string name="habit_add_not_all_fields">Не все значения заполнены</string>
+    <string name="habit_name_already_exists">Привычка с таким названием уже существует</string>
 </resources>

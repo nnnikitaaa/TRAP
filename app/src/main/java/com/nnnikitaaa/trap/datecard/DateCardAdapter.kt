@@ -1,4 +1,4 @@
-package com.nnnikitaaa.trap
+package com.nnnikitaaa.trap.datecard
 
 import android.content.Context
 import android.graphics.Color
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.nnnikitaaa.trap.R
 import java.time.format.TextStyle
 import java.util.Locale
 
@@ -53,6 +54,9 @@ class DateCardAdapter(
         }
 
         holder.card.setOnClickListener {
+            if (selectedItem == position) {
+                return@setOnClickListener
+            }
             val previousSelected = selectedItem
             selectedItem = position
             notifyItemChanged(previousSelected)
