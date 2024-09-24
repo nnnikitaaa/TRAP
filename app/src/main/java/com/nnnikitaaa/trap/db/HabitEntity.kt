@@ -19,13 +19,14 @@ data class HabitEntity(
     val active: Boolean
 )
 
-fun HabitEntity.toHabit(completed: Boolean, enabled: Boolean): Habit {
+fun HabitEntity.toHabit(completed: Boolean, enabled: Boolean, clickable: Boolean): Habit {
     return Habit(
         id = this.id,
         name = this.name,
         period = this.period,
         startDate = this.startDate,
         completed = completed,
-        enabled = enabled
+        enabled = enabled,
+        clickable = clickable
     )
 }

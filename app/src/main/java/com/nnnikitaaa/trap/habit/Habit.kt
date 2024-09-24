@@ -8,5 +8,6 @@ data class Habit(
     val period: PeriodType,
     val startDate: LocalDate,
     val completed: Boolean,
+    val clickable: Boolean = true,
     val enabled: Boolean = true
 )

@@ -26,6 +26,6 @@ data class HabitHistoryEntity(
     var completed: Boolean
 )
 
-fun HabitHistoryEntity.toHabit(habit: HabitEntity, enabled: Boolean): Habit {
-    return habit.toHabit(this.completed, enabled)
+fun HabitHistoryEntity.toHabit(habit: HabitEntity, enabled: Boolean, clickable: Boolean): Habit {
+    return habit.toHabit(this.completed, enabled, clickable)
 }

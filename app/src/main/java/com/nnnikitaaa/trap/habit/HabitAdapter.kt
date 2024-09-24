@@ -8,16 +8,16 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nnnikitaaa.trap.R
-import com.nnnikitaaa.trap.datecard.DateCard
 
 class HabitAdapter(
     private var habits: MutableList<Habit>,
     private var context: Context,
-    private val onCheckBoxCheckedChange: (Habit, Int, Boolean) -> Unit
+    private val onCheckBoxCheckedChange: (Habit, Int, Boolean) -> Unit,
+    private val onClicked: (Habit, Int) -> Unit
 ) :
     RecyclerView.Adapter<HabitAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.habitTitle)
         val description: TextView = view.findViewById(R.id.habitDescription)
         val checkbox: CheckBox = view.findViewById(R.id.habitCheckbox)
@@ -39,9 +39,13 @@ class HabitAdapter(
         holder.checkbox.setOnCheckedChangeListener(null)
         holder.checkbox.isEnabled = currentHabit.enabled
         holder.checkbox.isChecked = currentHabit.completed
+        holder.view.isClickable = currentHabit.clickable
 
         holder.checkbox.setOnCheckedChangeListener { _, isChecked ->
             onCheckBoxCheckedChange(currentHabit, position, isChecked)
+        }
+        holder.view.setOnClickListener {
+            onClicked(currentHabit, position)
         }
     }
 

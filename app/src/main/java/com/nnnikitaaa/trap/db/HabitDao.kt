@@ -26,14 +26,17 @@ interface HabitDao {
     suspend fun getAllHabits(): List<HabitEntity>
 
     @Query("SELECT * FROM habits WHERE id = :habitId")
-    suspend fun getHabit(habitId: Int): HabitEntity
+    suspend fun getHabit(habitId: Long): HabitEntity
 
     @Query("SELECT * FROM habits WHERE name = :name")
     suspend fun getHabit(name: String): HabitEntity?
+
+    @Query("SELECT * FROM habits WHERE name = :name AND id != :excludeId")
+    suspend fun getHabit(name: String, excludeId: Long): HabitEntity?
 
     @Query("SELECT * FROM habits WHERE startDate <= :startDate")
     suspend fun getAllHabits(startDate: LocalDate): List<HabitEntity>
 
     @Query("SELECT * FROM habits WHERE startDate <= :startDate AND id NOT IN (:excludeIds)")
-    suspend fun getAllHabits(startDate: LocalDate, excludeIds: List<Int>): List<HabitEntity>
+    suspend fun getAllHabits(startDate: LocalDate, excludeIds: List<Long>): List<HabitEntity>
 }

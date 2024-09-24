@@ -2,10 +2,14 @@
     <string name="app_name">TRAP</string>
     <string name="period_title_text">Период:</string>
     <string name="save_button_text">Сохранить</string>
+    <string name="delete_button_text">Удалить</string>
     <string name="create_habit_title">создание привычки</string>
+    <string name="update_habit_title">обновление привычки</string>
     <string name="name_text">Название</string>
     <string name="date_start_text">Дата начала</string>
     <string name="habit_added_msg">Привычка успешно добавлена!</string>
+    <string name="habit_updated_msg">Привычка успешно обновлена!</string>
+    <string name="habit_deleted_msg">Привычка успешно удалена!</string>
     <string name="blank_string">TextView</string>
     <string name="today">сегодня</string>
     <string name="tomorrow">завтра</string>

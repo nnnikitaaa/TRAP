@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
         val historyDao = db.habitHistoryDao()
         habitRecyclerView.layoutManager = LinearLayoutManager(this)
-        habitRecyclerView.adapter = HabitAdapter(mutableListOf(), this) { habit, _, isChecked ->
+        habitRecyclerView.adapter = HabitAdapter(mutableListOf(), this, onCheckBoxCheckedChange = { habit, _, isChecked ->
             CoroutineScope(Dispatchers.IO).launch {
                 val historyEntity = historyDao.getHistory(selectedDate, habit.id)
                 historyEntity?.let {
@@ -118,7 +118,14 @@ class MainActivity : AppCompatActivity() {
                     historyDao.insertHistory(newHistory)
                 }
             }
-        }
+        }, onClicked = { habit, _ ->
+            val intent = Intent(this, UpdateHabitActivity::class.java)
+            intent.putExtra("id", habit.id)
+            intent.putExtra("name", habit.name)
+            intent.putExtra("periodName", habit.period.name)
+            intent.putExtra("startDate", habit.startDate.toEpochDay())
+            activityResultLauncher.launch(intent)
+        } )
         updateHabits(selectedDate)
     }
 
@@ -128,7 +135,7 @@ class MainActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 val habitEntities = habitDao.getAllHabits(date)
                 val filteredHabits = habitEntities
-                    .map { it.toHabit(completed = false, enabled = false) }
+                    .map { it.toHabit(completed = false, enabled = false, clickable = true) }
                     .filter { isHabitDay(it, date) }
 
                 withContext(Dispatchers.Main) {
@@ -147,12 +154,12 @@ class MainActivity : AppCompatActivity() {
                 val excludeIds = historyEntities.map { it.habitId }.toSet()
                 val filteredHabits = habitEntities
                     .filterNot { habit -> excludeIds.contains(habit.id) }
-                    .map { it.toHabit(completed = false, enabled = true) }
+                    .map { it.toHabit(completed = false, enabled = true, clickable = true) }
                     .filter { isHabitDay(it, date) }
 
                 val habitMap = habitEntities.associateBy { it.id }
                 val historyHabits = historyEntities.mapNotNull { history ->
-                    habitMap[history.habitId]?.let { history.toHabit(it, enabled = true) }
+                    habitMap[history.habitId]?.let { history.toHabit(it, enabled = true, clickable = true) }
                 }
 
                 val combinedHabits = (filteredHabits + historyHabits).sortedBy { it.id }
@@ -172,7 +179,7 @@ class MainActivity : AppCompatActivity() {
 
                 val habitMap = habitEntities.associateBy { it.id }
                 val historyHabits = historyEntities.mapNotNull { history ->
-                    habitMap[history.habitId]?.let { history.toHabit(it, enabled = false) }
+                    habitMap[history.habitId]?.let { history.toHabit(it, enabled = false, clickable = false) }
                 }
 
                 withContext(Dispatchers.Main) {

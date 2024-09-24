@@ -4,7 +4,7 @@ import android.content.Context
 import com.nnnikitaaa.trap.R
 import java.time.LocalDate
 
-enum class PeriodType(val stringResId: Int) {
+enum class PeriodType(val stringResId: Int){
     DAILY(R.string.period_daily),
     WEEKLY(R.string.period_weekly),
     MONTHLY(R.string.period_monthly),
