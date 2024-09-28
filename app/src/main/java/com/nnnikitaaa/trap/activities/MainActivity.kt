@@ -2,7 +2,9 @@ package com.nnnikitaaa.trap.activities
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.nnnikitaaa.trap.BuildConfig
 import com.nnnikitaaa.trap.R
 import com.nnnikitaaa.trap.datecard.DateCard
 import com.nnnikitaaa.trap.datecard.DateCardAdapter
@@ -21,13 +24,30 @@ import com.nnnikitaaa.trap.db.HabitHistoryEntity
 import com.nnnikitaaa.trap.db.toHabit
 import com.nnnikitaaa.trap.habit.HabitAdapter
 import com.nnnikitaaa.trap.habit.isHabitDay
+import com.nnnikitaaa.trap.jokes.Joke
+import com.nnnikitaaa.trap.jokes.JokeApiService
+import com.yandex.mapkit.MapKitFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Path
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+
+
+data class Cat(val id: String, val url: String)
+
+interface CatApi {
+    @GET("v1/images/search?limit=1&category_ids=5")
+    fun getCat(): Call<List<Cat>>
+}
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addHabitButton: FloatingActionButton
     private lateinit var datesRecyclerView: RecyclerView
     private lateinit var habitRecyclerView: RecyclerView
+    private lateinit var locationImage: ImageView
 
     private var selectedDate = LocalDate.now()
 
@@ -45,6 +66,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        MapKitFactory.setApiKey(BuildConfig.MAPKIT_API_KEY)
+        MapKitFactory.initialize(this)
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -75,6 +98,35 @@ class MainActivity : AppCompatActivity() {
         dateActivityTitle = findViewById(R.id.dateActivityTitle)
         datesRecyclerView = findViewById(R.id.datesRecyclerView)
         habitRecyclerView = findViewById(R.id.habitRecyclerView)
+        locationImage = findViewById(R.id.locationImage)
+
+        locationImage.setOnClickListener {
+            val mapPopupDialog = MapPopupDialog(this)
+            mapPopupDialog.show()
+        }
+
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://v2.jokeapi.dev/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val jokeApi = retrofit.create(JokeApiService::class.java)
+
+
+        jokeApi.getJoke().enqueue(object : retrofit2.Callback<Joke> {
+            override fun onResponse(call: Call<Joke>, response: Response<Joke>) {
+                val joke = response.body()
+                if (joke != null && !joke.error) {
+                    val dialog = JokePopupDialog(this@MainActivity, joke.setup, joke.delivery)
+                    dialog.show()
+                }
+            }
+
+            override fun onFailure(call: Call<Joke>, t: Throwable) {
+                Snackbar.make(findViewById(android.R.id.content), "Не удалось загрузить шутку.", Snackbar.LENGTH_SHORT).show()
+            }
+        })
 
         addHabitButton.setOnClickListener {
             val intent = Intent(this, AddHabitActivity::class.java)

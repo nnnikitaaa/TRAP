@@ -9,6 +9,10 @@ android {
     namespace = "com.nnnikitaaa.trap"
     compileSdk = 34
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.nnnikitaaa.trap"
         minSdk = 28
@@ -17,6 +21,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "MAPKIT_API_KEY", "\"${rootProject.extra["mapkitApiKey"]}\"")
+        
     }
 
     buildTypes {
@@ -42,7 +48,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -57,4 +62,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
+    implementation(libs.maps.mobile)
+    implementation(libs.retrofit)
+    implementation (libs.converter.gson)
 }

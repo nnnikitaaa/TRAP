@@ -1,0 +1,25 @@
+<!-- res/layout/map_popup.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+    <com.yandex.mapkit.mapview.MapView
+        android:id="@+id/yandexMapView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Optional button to close the dialog -->
+    <Button
+        android:id="@+id/closeButton"
+        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Закрыть" />
+</LinearLayout>

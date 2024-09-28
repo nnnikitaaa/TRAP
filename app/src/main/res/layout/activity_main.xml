@@ -22,51 +22,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/LocationLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/dateActivityTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/locationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="г. Красноярск"
-            android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/locationImage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="Текущая локация"
-            android:scaleX="0.75"
-            android:scaleY="0.75"
-            app:srcCompat="@drawable/my_location"
-            app:tint="?android:attr/textColorSecondary" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/temperatureText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="9°"
-        android:textColor="?android:attr/textColorSecondary"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/temperatureIcon"
-        app:layout_constraintStart_toEndOf="@+id/temperatureIcon"
-        app:layout_constraintTop_toTopOf="@+id/temperatureIcon" />
-
     <ImageView
-        android:id="@+id/temperatureIcon"
+        android:id="@+id/locationImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -74,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/dateActivityTitle"
-        app:srcCompat="@drawable/sunny"
+        app:srcCompat="@drawable/my_location"
         app:tint="?android:attr/textColorSecondary" />
 
     <androidx.recyclerview.widget.RecyclerView
