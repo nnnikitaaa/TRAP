@@ -248,8 +248,9 @@ class MainActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val habitEntities = habitDao.getAllHabits(date)
+
             habitEntities.forEach {
-                if (historyDao.getHistory(date, it.id) == null) {
+                if (it.period.isHabitDay(it.startDate, date) && historyDao.getHistory(date, it.id) == null) {
                     historyDao.insertHistory(
                         HabitHistoryEntity(
                             habitId = it.id,
