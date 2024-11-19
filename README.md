@@ -38,3 +38,6 @@ T.R.A.P. - Track, Reflect, Achieve, Progress
 ### Шутка дня
 
 <img src="https://github.com/user-attachments/assets/5fd1b46f-0253-42e6-92e2-ca347506822c" style="height: 500px;"/>
+
+## Инструкция по сборке
+Для сборки приложения и создания APK файла введите команду в консоли: gradlew assembleDebug
